@@ -1,0 +1,85 @@
+basePath: /v2
+definitions:
+  types.ToyReq:
+    properties:
+      name:
+        description: |-
+          the name for this toy
+          required: true
+          min length: 3
+        type: string
+      price:
+        description: |-
+          the price for this toy
+          required: true
+          min: 1
+        type: integer
+    type: object
+host: petstore.swagger.io
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /v1/toys/:
+    post:
+      consumes:
+      - application/json
+      description: create toy
+      parameters:
+      - description: 新建玩具body入参
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/types.ToyReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Create toy
+  /v1/toys/{toyID}:
+    get:
+      consumes:
+      - application/json
+      description: get toy by ID
+      parameters:
+      - description: path参数：玩具ID
+        in: path
+        name: toyID
+        required: true
+        type: integer
+      - description: query参数：页码
+        in: query
+        name: pageNum
+        required: true
+        type: integer
+      - description: 每页数量
+        in: query
+        name: pageSize
+        type: integer
+      - description: header参数：request id
+        in: header
+        name: requestID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      summary: Get toy
+swagger: "2.0"
